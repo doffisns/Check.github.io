@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error and Info Bars</title>
+    <style>
+        /* Bar styles */
+        .bar {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        /* Error bar styles */
+        .error-bar {
+            background-color: #f8d7da; /* Light red */
+            color: #721c24; /* Dark red text */
+        }
+
+        /* Info bar styles */
+        .info-bar {
+            background-color: #d1ecf1; /* Light blue */
+            color: #0c5460; /* Dark blue text */
+        }
+
+        /* Image styling */
+        .bar img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        /* Text styling */
+        .bar-text {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        /* Close button */
+        .bar button {
+            background-color: transparent;
+            border: 1px solid;
+            color: inherit;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .bar button:hover {
+            opacity: 0.8;
+        }
+
+        /* Input container styles */
+        .input-container {
+            margin: 50px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input id="inputText" type="text" placeholder="Enter text here">
+        <button onclick="checkInput()">Submit</button>
+    </div>
+
+    <!-- Error bar -->
+    <div id="errorBar" class="bar error-bar">
+        <img src="https://i.imgur.com/GnyDvKN.png" alt="Error Icon">
+        <span class="bar-text" id="errorMessage">An error occurred! Please try again.</span>
+        <button onclick="closeBar('errorBar')">Close</button>
+    </div>
+
+    <!-- Info bar -->
+    <div id="infoBar" class="bar info-bar">
+        <img src="https://i.imgur.com/ilgqWuX.png" alt="Info Icon">
+        <span class="bar-text" id="infoMessage"></span>
+        <button onclick="closeBar('infoBar')">Close</button>
+    </div>
+
+    <script>
+        // Function to check input and display appropriate bar
+        function checkInput() {
+            const input = document.getElementById("inputText").value;
+
+            // Clear existing bars
+            closeBar('errorBar');
+            closeBar('infoBar');
+
+            if (input === "com.apple.mgmt.External.79ecd0a6-942e-4276-82fb-cd675b6e075d") {
+                // Show info bar for Jamf School MDM Profile
+                document.getElementById("infoMessage").innerText = "Name: Jamf School MDM Profile";
+                document.getElementById("infoBar").style.display = "flex";
+            } else if (input === "vajiravudh") {
+                // Show info bar for Type: Vajiravudh
+                document.getElementById("infoMessage").innerText = "Type: Vajiravudh";
+                document.getElementById("infoBar").style.display = "flex";
+            } else {
+                // Show error bar for other inputs
+                document.getElementById("errorBar").style.display = "flex";
+            }
+        }
+
+        // Function to close a bar
+        function closeBar(barId) {
+            document.getElementById(barId).style.display = "none";
+        }
+    </script>
+</body>
+</html>
